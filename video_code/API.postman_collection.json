@@ -1,0 +1,134 @@
+{
+	"info": {
+		"_postman_id": "094908bd-4c79-4390-902d-8d37af905fdf",
+		"name": "Register and authenticate",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "/register Copy",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "JWT"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\": \"user1\",\n\t\"password\": \"abcxyz\"\n}"
+				},
+				"url": "{{url}}/register"
+			},
+			"response": []
+		},
+		{
+			"name": "/auth Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"",
+							"postman.setEnvironmentVariable(\"access_token\", jsonData.access_token);"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "JWT"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\": \"user1\",\n\t\"password\": \"abcxyz\"\n}"
+				},
+				"url": "{{url}}/auth"
+			},
+			"response": []
+		},
+		{
+			"name": "/store/<name> Copy",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": "{{url}}/store/my_store"
+			},
+			"response": []
+		},
+		{
+			"name": "/item/<name> Copy",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"price\": 17.99,\n\t\"store_id\": 3\n}"
+				},
+				"url": "{{url}}/item/my_item"
+			},
+			"response": []
+		},
+		{
+			"name": "/stores Copy",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "{{url}}/stores"
+			},
+			"response": []
+		},
+		{
+			"name": "/item/my_item Copy",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": "{{url}}/item/my_item"
+			},
+			"response": []
+		},
+		{
+			"name": "/store/<name> Copy",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": "{{url}}/store/my_store"
+			},
+			"response": []
+		},
+		{
+			"name": "/item/my_item Copy",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "JWT {{access_token}}"
+					}
+				],
+				"url": "{{url}}/item/my_item"
+			},
+			"response": []
+		}
+	]
+}
